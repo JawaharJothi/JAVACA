@@ -9,19 +9,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<fmt:setBundle basename="messages" />
+<title><fmt:message key="title" /></title>
 
-<title>Team-8 Course Application Processing System</title>
-<%-- <fmt:setBundle basename="messages"/> --%>
 <!-- Bootstrap Core CSS -->
-<link href="../style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<c:url value='/style/bootstrap/css/bootstrap.min.css'/>"
+	rel="stylesheet" />
 
 <!-- MetisMenu CSS -->
-<link href="../style/metisMenu/metisMenu.min.css" rel="stylesheet">
+<link href="<c:url value='/style/metisMenu/metisMenu.min.css'/>"
+	rel="stylesheet" />
 
 <!-- Custom CSS -->
-<link href="../style/custom/css/style.css" rel="stylesheet">
-
-
+<link href="<c:url value='/style/custom/css/style.css'/>"
+	rel="stylesheet" />
 
 </head>
 
@@ -29,54 +30,6 @@
 
 	<div id="wrapper">
 
-		<!-- Navigation -->
-		<nav class="navbar navbar-default navbar-static-top" role="navigation"
-			style="margin-bottom: 0">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.html">Team 8</a>
-		</div>
-		<!-- /.navbar-header -->
-
-		<ul class="nav navbar-top-links navbar-right">
-
-
-			<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					Home </a></li>
-			<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					Contact Us </a></li>
-			<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					About Us </a></li>
-			<!-- /.dropdown -->
-		</ul>
-		<!-- /.navbar-top-links -->
-
-		<div class="navbar-default sidebar" role="navigation">
-			<div class="sidebar-nav navbar-collapse">
-				<ul class="nav" id="side-menu">
-
-					<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
-							Lecturer</a></li>
-
-					<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
-							Student</a></li>
-					<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
-							Course</a></li>
-					<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
-							Class</a></li>
-					<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
-							LogOut</a></li>
-
-				</ul>
-			</div>
-			<!-- /.sidebar-collapse -->
-		</div>
-		<!-- /.navbar-static-side --> </nav>
 
 		<div id="page-wrapper">
 			<div class="row">
@@ -87,23 +40,57 @@
 			</div>
 			<!-- /.row -->
 			<div class="row">
-				<div class="col-lg-1">
+				<div class="col-lg-12">
+				<a href="${url}"><fmt:message key="label.student.add" /></a>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
-								<%-- <th><fmt:message key="label.student.name"/></th>
+								<th><fmt:message key="label.student.name"/></th>
 								<th><fmt:message key="label.student.dob"/></th>
 								<th><fmt:message key="label.student.phnumber"/></th>
 								<th><fmt:message key="label.student.address"/></th>
 								<th><fmt:message key="label.student.email"/></th>
+							
+								<th><fmt:message key="label.student.status"/></th>
 								<th><fmt:message key="label.student.edit"/></th>
-								<th><fmt:message key="label.student.delete"/></th> --%>
+								<th><fmt:message key="label.student.delete"/></th>
 								
 							</tr>
 						</thead>
 						<tbody>
-							
+							<c:forEach var="student" items="${students}" varStatus="status">
+							<tr class="${status.index%2==0?'even':'odd'}">
+								<td>${status.index + 1}</td>
+								<td style="display: none;">${student.matricno }</td>
+								<td>${student.studentname }</td>
+								<td>${student.dateofbirth }</td>
+								<td>${student.phone }</td>
+								<td>${student.address }</td>
+								<td>${student.email }</td>
+								
+								<td>${student.status}</td>
+								<td><c:url var="updurl" scope="page"
+										value="/view/StudentSetup.jsp">
+										<c:param name="id" value="${student.matricno }" />
+										<c:param name="name" value="${student.studentname}" />
+										<c:param name="dob" value="${student.dateofbirth}" />
+										<c:param name="phnumber" value="${student.phone }" />
+										<c:param name="address" value="${student.address }" />
+										<c:param name="email" value="${student.email}" />
+										<c:param name="edu" value="${student.image }" />
+										<c:param name="edu" value="${student.status }" />
+										<c:param name="password" value="${student.password }" />
+										<c:param name="update" value="true" />
+									</c:url> <a href="${updurl}"><fmt:message key="label.student.edit" /></a>
+								</td>
+								<td><c:url var="delurl" scope="page"
+										value="/Studentdelete">
+										<c:param name="id" value="${student.matricno}" />
+									</c:url> <a href="${delurl}"><fmt:message
+											key="label.student.delete" /></a></td>
+							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -114,19 +101,19 @@
 		<!-- /#page-wrapper -->
 
 	</div>
-	<!-- /#wrapper -->
+
 
 	<!-- jQuery -->
-	<script src="../style/jquery/jquery.min.js"></script>
+	<script src="<c:url value='/style/jquery/jquery.min.js'/>"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="../style/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<c:url value='/style/bootstrap/js/bootstrap.min.js'/>"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
-	<script src="../style/metisMenu/metisMenu.min.js"></script>
+	<script src="<c:url value='/style/metisMenu/metisMenu.min.js'/>"></script>
 
 	<!-- Custom Theme JavaScript -->
-	<script src="../style/custom/js/sb-admin-2.js"></script>
+	<script src="<c:url value='/style/custom/js/sb-admin-2.js'/>"></script>
 
 </body>
 

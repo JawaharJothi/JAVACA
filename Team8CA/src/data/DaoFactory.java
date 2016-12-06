@@ -17,5 +17,9 @@ public class DaoFactory {
 		LecProcessDAO lpdao = new LecProcessDAOImpl();
 		return lpdao;
 	}
+	public static StudentDAO getStudentDao(){
+		StudentDAO sdao = new StudentDAOImpl();
+		return sdao;
+	}
 
 }
