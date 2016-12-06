@@ -13,10 +13,5 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/jstl.jar"/>
-	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-3.1.12-bin.jar"/>
-	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/servlet.jar"/>
-	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/sitemesh-2.4.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
