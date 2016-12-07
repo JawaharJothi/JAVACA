@@ -51,7 +51,7 @@
 								<td>${status.index + 1}</td>
 								<td>${course.courseName }</td>
 								<td>${course.startDate }</td>
-								<td>${course.duration }</td>
+								<td>${course.endDate }</td>
 								<td>${course.classSize }</td>
 								<td>${course.typeOfCourse }</td>
 								

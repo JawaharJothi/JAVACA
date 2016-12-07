@@ -5,7 +5,7 @@ public class ClassCourseDTO {
 	private int classSize;
 	private String startDate;
 	private String courseName;
-	private String duration;
+	private String endDate;
 	private String credit;
 	public String getClassID() {
 		return classID;
@@ -34,11 +34,12 @@ public class ClassCourseDTO {
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	public String getDuration() {
-		return duration;
+
+	public String getEndDate() {
+		return endDate;
 	}
-	public void setDuration(String duration) {
-		this.duration = duration;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 	public String getCredit() {
 		return credit;
@@ -58,18 +59,19 @@ public class ClassCourseDTO {
 	public void setLecturerID(String lecturerID) {
 		this.lecturerID = lecturerID;
 	}
-	public ClassCourseDTO(String classID, int classSize, String startDate, String courseName, String duration,
+
+	private String typeOfCourse;
+	private String lecturerID;
+	public ClassCourseDTO(String classID, int classSize, String startDate, String courseName, String endDate,
 			String credit, String typeOfCourse, String lecturerID) {
 		super();
 		this.classID = classID;
 		this.classSize = classSize;
 		this.startDate = startDate;
 		this.courseName = courseName;
-		this.duration = duration;
+		this.endDate = endDate;
 		this.credit = credit;
 		this.typeOfCourse = typeOfCourse;
 		this.lecturerID = lecturerID;
 	}
-	private String typeOfCourse;
-	private String lecturerID;
 }

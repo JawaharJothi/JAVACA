@@ -9,25 +9,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import model.ClassCourseDTO;
+import model.StudentGradingDTO;
 import model.User;
-import service.LecturerManager;
 import service.LecProcessManager;
 
 /**
- * Servlet implementation class LoadLecturerCourse
+ * Servlet implementation class UpdateGrade
  */
-@WebServlet("/loadlc")
-public class LoadLecturerCourse extends HttpServlet {
+@WebServlet("/updategrade")
+public class UpdateGrade extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadLecturerCourse() {
+    public UpdateGrade() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,12 +46,16 @@ public class LoadLecturerCourse extends HttpServlet {
 		doProcess(request, response);
 	}
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LecProcessManager lpm = new LecProcessManager();
+		// TODO Auto-generated method stub
+
+		LecProcessManager lpmn=new LecProcessManager();
+		ArrayList<StudentGradingDTO> slist = lpmn.findstudentforgrade(request.getParameter("cbClassID"));
 		User user = new User();
 		user = (User)request.getSession().getAttribute("profile");
-		ArrayList<ClassCourseDTO> list = lpm.findassignCourse(user.getUserID());
+		request.setAttribute("slists", slist);
+		ArrayList<ClassCourseDTO> list = lpmn.findassignCourse(user.getUserID());
 		request.setAttribute("courses", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/viewlecturer/ViewCourse.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/viewlecturer/StudentGrading.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {
