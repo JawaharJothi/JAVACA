@@ -41,10 +41,24 @@
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
-				<a href="${url}"><fmt:message key="label.student.add" /></a>
+				<c:url var="url" scope="page" value="/view/StudentSetup.jsp">
+					<c:param name="id" value="" />
+					<c:param name="name" value="" />
+					<c:param name="dob" value="" />
+					<c:param name="phnumber" value="" />
+					<c:param name="address" value="" />
+					<c:param name="email" value="" />
+					<c:param name="edu" value=""></c:param>
+					<c:param name="password" value=""></c:param>
+					<c:param name="insert" value="true" />
+				</c:url>
+			<a href="${url}" ><fmt:message key="label.student.add" /></a> 
+			
+			
 					<table class="table">
 						<thead>
 							<tr>
+							
 								<th>#</th>
 								<th><fmt:message key="label.student.name"/></th>
 								<th><fmt:message key="label.student.dob"/></th>
@@ -85,8 +99,8 @@
 									</c:url> <a href="${updurl}"><fmt:message key="label.student.edit" /></a>
 								</td>
 								<td><c:url var="delurl" scope="page"
-										value="/Studentdelete">
-										<c:param name="id" value="${student.matricno}" />
+										value="/DeleteStudent">
+										<c:param name="matricnumber" value="${student.matricno}" />
 									</c:url> <a href="${delurl}"><fmt:message
 											key="label.student.delete" /></a></td>
 							</tr>

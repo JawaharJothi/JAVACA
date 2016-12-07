@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import model.StudentDTO;
 
 public class StudentDAOImpl implements StudentDAO {
@@ -63,25 +66,23 @@ public class StudentDAOImpl implements StudentDAO {
 		}
 		return slist;
 
-		
 	}
-	
+
 	@Override
 	public void insertStudent(StudentDTO sdto) throws DAOException {
 		// TODO Auto-generated method stub
-		
+
 		String sqlInsert1 = "INSERT INTO student VALUES(?,?,?,?,?,?,?,?)";
 		String sqlInsert2 = "INSERT INTO user VALUES(?,?,?)";
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		} 
-		catch (ClassNotFoundException e1) {
+		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Connection con = null;
-		
+
 		try {
 			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(sdto.getDateofbirth());
 			Date sqldate = new Date(date.getTime());
@@ -104,7 +105,7 @@ public class StudentDAOImpl implements StudentDAO {
 			pt.setString(2, sdto.getPassword());
 			pt.setString(3, "Student");
 			pt.executeUpdate();
-			pt.close(); 
+			pt.close();
 
 		} catch (Exception e) {
 			String error = "Error inseting Student. Nested Exception is: " + e;
@@ -117,19 +118,83 @@ public class StudentDAOImpl implements StudentDAO {
 		}
 	}
 
+	public StudentDTO findstudent(String id) throws DAOException {
 
-	public StudentDTO findstudent(String id) throws DAOException{
-		
-		 
-		return null;
-		
-		
+		String selectsql = "SELECT * FROM student WHERE MatricNumber='" + id.trim() + "'";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		StudentDTO sdto = new StudentDTO();
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(selectsql);
+			while (rs.next()) {
+				
+				sdto.setMatricno(rs.getString("MatricNumber"));
+				sdto.setStudentname(rs.getString("StudentName"));
+				sdto.setDateofbirth(rs.getString("DateofBirth"));
+				sdto.setAddress(rs.getString("Address"));
+				sdto.setPhone(rs.getInt("PhoneNumber"));
+				sdto.setImage(rs.getString("Image"));
+				sdto.setStatus(rs.getString("Status"));
+				sdto.setEmail(rs.getString("Email"));
+
+			}
+			System.out.println(sdto.getStudentname());
+
+		} catch (Exception e) {
+			String error = "Error selecting student. Nested Exception is: " + e;
+			Logger.getLogger(getClass().getName()).log(Level.SEVERE, error);
+			throw new DAOException(error);
+		} finally {
+			try {
+
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		return sdto;
+
 	}
 
-	
 	@Override
 	public void deletestudent(StudentDTO sdto) throws DAOException {
 		// TODO Auto-generated method stub
+		String insertsql1 = "DELETE FROM `team8`.`student` WHERE `MatricNumber`=?";
+		String insertsql2 = "DELETE FROM `team8`.`user` WHERE `UserID`=?";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Connection con = null;
+		try {
+			con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+			PreparedStatement pt = con.prepareStatement(insertsql1);
+			pt.setString(1, sdto.getMatricno());
+			pt.executeUpdate();
+			pt.close();
+
+			pt = con.prepareStatement(insertsql2);
+			pt.setString(1, sdto.getMatricno());
+			pt.executeUpdate();
+			pt.close();
+		} catch (SQLException e) {
+			String error = "Error Deleteing Student. Nested Exception is: " + e;
+			throw new DAOException(error);
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e) {
+			}
+		}
 
 	}
 
@@ -137,5 +202,56 @@ public class StudentDAOImpl implements StudentDAO {
 	public void updatestudent(StudentDTO sdto) throws DAOException {
 		// TODO Auto-generated method stub
 
+		String insertsql1 = "UPDATE student SET  StudentName=?, DateofBirth=?, PhoneNumber=?, Address=?, Email=?,  Image=?, Status=? WHERE MatricNumber=?;";
+		String insertsql2 = "UPDATE user SET Password=? WHERE UserID=? ";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Connection con = null;
+		try {
+			java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(sdto.getDateofbirth());
+			Date sqldate = new Date(date.getTime());
+
+			con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+			PreparedStatement pt = con.prepareStatement(insertsql1);
+
+			pt.setString(1, sdto.getStudentname());
+			pt.setDate(2, sqldate);
+			pt.setInt(3, sdto.getPhone());
+			pt.setString(4, sdto.getAddress());
+			pt.setString(5, sdto.getEmail());
+			pt.setString(6, sdto.getImage());
+			pt.setString(7, sdto.getStatus());
+			pt.setString(8, sdto.getMatricno());
+			pt.executeUpdate();
+			pt.close();
+
+			pt = con.prepareStatement(insertsql2);
+			pt.setString(2, sdto.getMatricno());
+			pt.setString(1, sdto.getPassword());
+			pt.executeUpdate();
+			pt.close();
+
+		} catch (Exception e) {
+			String error = "Error Updating Student. Nested Exception is: " + e;
+			throw new DAOException(error);
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+
 	}
+
+	@Override
+	public StudentDTO findallstudents(String matric) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

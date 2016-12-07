@@ -64,7 +64,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 
 	@Override
 	public void insertlecturer(LecturerDTO ldto) throws DAOException {
-		String insertsql1 = "INSERT INTO lecturer VALUES(?,?,?,?,?,?,?)";
+		String insertsql1 = "INSERT INTO lecturer VALUES(?,?,?,?,?,?,?,?,?)";
 		String insertsql2 = "INSERT INTO user VALUES(?,?,?)";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -86,6 +86,8 @@ public class LecturerDAOImpl implements LecturerDAO {
 			pt.setString(5, ldto.getLectureraddress());
 			pt.setString(6, ldto.getEmail());
 			pt.setString(7, ldto.getDegree());
+			pt.setString(8, "");
+			pt.setString(9, "active");
 			pt.executeUpdate();
 			pt.close();
 
@@ -110,6 +112,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 
 	@Override
 	public void deletelecturer(LecturerDTO ldto) throws DAOException {
+		
 		// TODO Auto-generated method stub
 		String insertsql1 = "DELETE FROM `team8`.`lecturer` WHERE `LecturerID`=?";
 		String insertsql2 = "DELETE FROM `team8`.`user` WHERE `UserID`=?";

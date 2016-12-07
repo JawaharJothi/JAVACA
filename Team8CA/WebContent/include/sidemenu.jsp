@@ -8,7 +8,7 @@
                         </li>
                         
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Student</a>
+                            <a href=" <%=request.getContextPath() %>/sload"> <i class="fa fa-table fa-fw"></i> Students</a>
                         </li>
                         <li>
                             <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Course</a>
