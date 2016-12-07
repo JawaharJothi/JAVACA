@@ -21,5 +21,19 @@ public class DaoFactory {
 		StudentDAO sdao = new StudentDAOImpl();
 		return sdao;
 	}
+	
+	public static StudentGradingDAO getStudentGradingDao(){
+		StudentGradingDAO sgdao= new StudentGradingDAOImpl();
+		return sgdao;
+	}
 
+	
+	public static CourseGradeDAO getCourseGradeDAO(){
+		return new CourseGradeDAOImpl();
+	}
+
+	public static ClassDAO getClassDAO(){
+		
+		return new ClassDAOImpl();
+	}
 }

@@ -57,6 +57,7 @@
 										<label><fmt:message key="setup.dob" /></label> <input name="dob"
 											class="form-control" type="text" placeholder="yyyy-MM-dd"
 											value="${param['dob']}">
+											<input type="date" class="form-control">
 									</div>
 									<div class="form-group">
 										<label><fmt:message key="setup.phnumber" /></label> <input name="phone"

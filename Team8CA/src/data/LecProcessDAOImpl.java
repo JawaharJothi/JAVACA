@@ -16,7 +16,6 @@ public class LecProcessDAOImpl implements LecProcessDAO{
 	private static final String dbPassword = "password";
 	@Override
 	public ArrayList<ClassCourseDTO> findassigncourse(String id) throws DAOException {
-		
 		ArrayList<ClassCourseDTO> classcourse = new ArrayList<ClassCourseDTO>();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -38,8 +37,9 @@ public class LecProcessDAOImpl implements LecProcessDAO{
 				cclist.setCourseName(rs.getString("CourseName"));
 				cclist.setClassSize(Integer.parseInt(rs.getString("ClassSize")));
 				cclist.setStartDate(rs.getString("StartDate"));
-				cclist.setDuration(rs.getString("Duration"));
+				cclist.setEndDate(rs.getString("EndDate"));
 				cclist.setTypeOfCourse(rs.getString("TypeOfCourse"));
+				cclist.setClassID(rs.getString("ClassID"));
 				classcourse.add(cclist);
 			
 			}

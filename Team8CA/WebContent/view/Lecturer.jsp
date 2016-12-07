@@ -46,7 +46,7 @@
 					<c:param name="password" value=""></c:param>
 					<c:param name="insert" value="true" />
 				</c:url>
-				<a href="${url}"><fmt:message key="label.lecturer.add" /></a>
+				<a href="${url}" class="btn btn-primary"><fmt:message key="label.lecturer.add" /></a>
 
 				<table class="table">
 					<thead>
@@ -85,12 +85,12 @@
 										<c:param name="edu" value="${lecturer.degree }" />
 										<c:param name="password" value="${lecturer.password }" />
 										<c:param name="update" value="true" />
-									</c:url> <a href="${updurl}"><fmt:message key="label.lecturer.edit" /></a>
+									</c:url> <a href="${updurl}" class="btn btn-primary"><fmt:message key="label.lecturer.edit" /></a>
 								</td>
 								<td><c:url var="delurl" scope="page"
 										value="/lecturerdelete">
 										<c:param name="id" value="${lecturer.lecturerID }" />
-									</c:url> <a href="${delurl}"><fmt:message
+									</c:url> <a href="${delurl}" class="btn btn-primary"><fmt:message
 											key="label.lecturer.delete" /></a></td>
 							</tr>
 						</c:forEach>
