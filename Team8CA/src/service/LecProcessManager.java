@@ -48,5 +48,14 @@ public class LecProcessManager {
 		}
 		
 	}
+	
+	public void updatestudentgrading(String id, String grade, String cid){
+		try {
+			studentgradingDAO.updateStudentGrading(id, grade, cid);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

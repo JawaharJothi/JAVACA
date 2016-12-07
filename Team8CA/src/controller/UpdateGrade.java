@@ -47,24 +47,18 @@ public class UpdateGrade extends HttpServlet {
 	}
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		LecProcessManager lpmn=new LecProcessManager();
-		ArrayList<StudentGradingDTO> slist = lpmn.findstudentforgrade(request.getParameter("cbClassID"));
+		ArrayList<StudentGradingDTO> slist = lpmn.findstudentforgrade(request.getParameter("CID"));
 		User user = new User();
 		user = (User)request.getSession().getAttribute("profile");
 		request.setAttribute("slists", slist);
 		ArrayList<ClassCourseDTO> list = lpmn.findassignCourse(user.getUserID());
-		request.setAttribute("courses", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/viewlecturer/StudentGrading.jsp");
-		try {
-			rd.forward(request, response);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (StudentGradingDTO studentGradingDTO : slist) {
+			lpmn.updatestudentgrading(studentGradingDTO.getMatricNumber(), request.getParameter(studentGradingDTO.getMatricNumber()), request.getParameter("CID"));
 		}
+		RequestDispatcher rd = request.getRequestDispatcher("/loadlc");
+		rd.forward(request, response);
+		
 	}
 
 }

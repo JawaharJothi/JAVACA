@@ -71,10 +71,15 @@
 						<td>${slist.courseName }</td>
 						<td>${slist.startDate }</td>
 						<td>${slist.endDate }</td>
-						<td><input class="form-control" type=text name="" value="${slist.grade }"></td>
+						
+						<td><input  type="text" name="${slist.matricNumber }" value="${slist.grade }"></td>
+						
 					</tr>
 				</c:forEach>
+				
 			</table>
+			<input class="form-control" type="hidden" name="CID" value="${cid }">
+			<input type="submit" class="btn-primary">
 		</div>
 		</form>
 	</div>
