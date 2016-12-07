@@ -27,4 +27,13 @@ public class DaoFactory {
 		return sgdao;
 	}
 
+	
+	public static CourseGradeDAO getCourseGradeDAO(){
+		return new CourseGradeDAOImpl();
+	}
+
+	public static ClassDAO getClassDAO(){
+		
+		return new ClassDAOImpl();
+	}
 }
