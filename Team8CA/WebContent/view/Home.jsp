@@ -22,153 +22,42 @@
 <link href="../style/custom/css/style.css" rel="stylesheet">
 </head>
 <body>
+	<div id="page-wrapper">
+		<div class="row">
+			<div class="col-lg-12">
 
-<div id="wrapper">
+				<img alt="" src="${pageContext.request.contextPath}/img/iss.png"
+					width="100%" height="30%">
+				<h3>Course Application Processing System (CAPS)</h3>
+			</div>
+			<div class="col-lg-12" align="center">
+				<div class="header1">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Team 8</a>
-            </div>
-            <!-- /.navbar-header -->
+					<h2>Programmes We Provided</h2>
 
-            <ul class="nav navbar-top-links navbar-right">
-                
-                
-				<li>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                       Home
-                    </a>
-                    
-                </li>
-				<li>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                       Contact Us
-                    </a>
-                    
-                </li>
-                <li>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                       About Us
-                    </a>
-                    
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="col-lg-4">
+				<h4>Object Oriented Analysis & Design</h4>
+				<p>Instructor: Dr. Esther Tan Meng Yoke</p>
+				</div>
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        
-                        <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Lecturer</a>
-                        </li>
-                        
-                        <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Student</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Course</a>
-                        </li>
-						<li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Class</a>
-                        </li>
-						<li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> LogOut</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+				<div class="col-lg-4">
+				<h4>Java Fundamentals</h4>
+				<p>Instructor: Mr. Choo Zhi Min</p>
+				</div>
+				
+				<div class="col-lg-4">
+				<h4>Advanced C#</h4>
+				<p>Instructor:Derek Kiong Beng Kee </p>
+				</div>
+			</div>
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Student</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Student Information
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <label>Student Name</label>
-                                            <input class="form-control" type="text" >
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Date of Birth</label>
-                                            <input class="form-control" type="text" placeholder="dd/MM/yyyy">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Phone Number</label>
-                                            <input class="form-control" type="text" >
-                                        </div>
-										<div class="form-group">
-                                            <label>Address</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Email Address</label>
-                                            <input class="form-control" type="text">
-                                        </div>
-										<div class="form-group">
-                                            <label>Password</label>
-                                            <input class="form-control" type="password">
-                                        </div>
-										<div class="form-group">
-                                            <label>Confirm Password</label>
-                                            <input class="form-control" type="password">
-                                        </div>
-                                        <button type="submit" class="btn btn-default">Submit Button</button>
-                                        
-                                    </form>
-                                </div>
-                                
-                            </div>
-                            <!-- /.row (nested) -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
+		</div>
 
-    </div>
-    <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="../style/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../style/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../style/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../style/custom/js/sb-admin-2.js"></script>
+	</div>
 
 </body>
 </html>
