@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,32 +52,30 @@ public class Authentication extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("testting");
-		String path;
+
 		String u = request.getParameter("username");
 		String p = request.getParameter("password");
+		User user1 = new User();
+		user1.setUserID(u);
+		user1.setPassword(p);
+		UserService service = new UserService();
 		User user = new User();
-		user.setUserID(u);
-		user.setPassword(p);
-		UserService service;
-		boolean result = false;
-		try {
-			service = new UserService();
-			result = service.authenticate(user);
+		
 
+		user = service.authenticate(user1);
+		if(!user.getUserID().equals("")){
 			HttpSession session = request.getSession();
 			session.setAttribute("profile", user);
-		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new ServletException();
+			RequestDispatcher rd = request.getRequestDispatcher("/loadlc");
+			rd.forward(request, response);
 		}
-		if (result)
-			path = "/loadlc";
-		else
-			path = "/view/Fail.jsp";
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
+		else{
+			RequestDispatcher rd = request.getRequestDispatcher("/view/Fail.jsp");
+			rd.forward(request, response);
+		}
+		
+		
+	
 
 
 	}

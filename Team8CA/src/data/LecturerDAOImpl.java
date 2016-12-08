@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import model.LecturerDTO;
+import model.StudentDTO;
 
 
 public class LecturerDAOImpl implements LecturerDAO {
@@ -232,5 +233,7 @@ public class LecturerDAOImpl implements LecturerDAO {
 		}
 
 	}
+
+	
 
 }

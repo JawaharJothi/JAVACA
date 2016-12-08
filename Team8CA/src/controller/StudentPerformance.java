@@ -52,7 +52,7 @@ public class StudentPerformance extends HttpServlet {
 			ArrayList<StudentPerformanceDTO> splist = lpm.findstudentperformance(id);
 			request.setAttribute("id", id);
 			request.setAttribute("splist", splist);
-			RequestDispatcher rd = request.getRequestDispatcher("/viewlecturer/StudentPerformance.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/view/StudentPerformance.jsp");
 			rd.forward(request, response);
 		
 	}

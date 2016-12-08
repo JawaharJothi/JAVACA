@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,24 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
-import model.ClassCourseDTO;
-import model.User;
-import service.LecturerManager;
-import service.LecProcessManager;
 
 /**
- * Servlet implementation class LoadLecturerCourse
+ * Servlet implementation class LogOut
  */
-@WebServlet("/loadlc")
-public class LoadLecturerCourse extends HttpServlet {
+@WebServlet("/logout")
+public class LogOut extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadLecturerCourse() {
+    public LogOut() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,22 +40,18 @@ public class LoadLecturerCourse extends HttpServlet {
 		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
+	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LecProcessManager lpm = new LecProcessManager();
-		User user = new User();
-		user = (User)request.getSession().getAttribute("profile");
-		ArrayList<ClassCourseDTO> list = lpm.findassignCourse(user.getUserID());
-		request.setAttribute("courses", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/view/ViewCourse.jsp");
-		try {
-			rd.forward(request, response);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0"); 
+			   response.addHeader("Pragma", "no-cache"); 
+			   response.addDateHeader ("Expires", 0);
+		    session.invalidate();
 		}
+		response.sendRedirect(request.getContextPath()+"/LogIn.jsp");
+		
 	}
 
 }

@@ -52,7 +52,7 @@ public class StudentGrading extends HttpServlet {
 		user = (User)request.getSession().getAttribute("profile");
 		ArrayList<ClassCourseDTO> list = lpm.findassignCourse(user.getUserID());
 		request.setAttribute("courses", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/viewlecturer/StudentGrading.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/view/StudentGrading.jsp");
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {

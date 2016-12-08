@@ -7,6 +7,7 @@ import data.DaoFactory;
 import data.LecProcessDAO;
 import data.StudentGradingDAO;
 import model.ClassCourseDTO;
+import model.StudentDTO;
 import model.StudentGradingDTO;
 import model.StudentPerformanceDTO;
 
@@ -69,6 +70,19 @@ public class LecProcessManager {
 			e.printStackTrace();
 		}finally{
 			return splist;
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public ArrayList<StudentDTO> findenrollstudent(String id){
+		ArrayList<StudentDTO> slist = new ArrayList<StudentDTO>();
+		try {
+			slist = lecturerprocessDAO.findallstudents(id);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			return slist;
 		}
 	}
 

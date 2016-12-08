@@ -146,7 +146,7 @@ public class StudentDAOImpl implements StudentDAO {
 				sdto.setEmail(rs.getString("Email"));
 
 			}
-			System.out.println(sdto.getStudentname());
+			
 
 		} catch (Exception e) {
 			String error = "Error selecting student. Nested Exception is: " + e;

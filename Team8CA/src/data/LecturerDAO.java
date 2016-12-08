@@ -3,6 +3,7 @@ package data;
 import java.util.ArrayList;
 
 import model.LecturerDTO;
+import model.StudentDTO;
 
 public interface LecturerDAO {
 	public ArrayList<LecturerDTO> findalllecturer() throws DAOException;
@@ -10,4 +11,5 @@ public interface LecturerDAO {
 	public void insertlecturer(LecturerDTO ldto) throws DAOException;
 	public void deletelecturer(LecturerDTO ldto) throws DAOException;
 	public void updatelecturer(LecturerDTO ldto) throws DAOException;
+	
 }

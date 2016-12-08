@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.ClassCourseDTO;
+import model.StudentDTO;
 import model.StudentPerformanceDTO;
 
 
@@ -98,6 +99,52 @@ public class LecProcessDAOImpl implements LecProcessDAO{
 		return slist;
 	}
 
-	
+	@Override
+	public ArrayList<StudentDTO> findallstudents(String id) throws DAOException {
+		// TODO Auto-generated method stub
+		ArrayList<StudentDTO> slist = new ArrayList<StudentDTO>();
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+
+		catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		String sql = "select * from student s, student_enrolment se, class c WHERE s.MatricNumber=se.MatricNumber AND se.ClassID=c.ClassID AND  c.ClassID='"+id+"'";
+		Connection con = null;
+
+		try {
+			con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				StudentDTO sdto = new StudentDTO();
+				sdto.setMatricno(rs.getString("MatricNumber"));
+				sdto.setStudentname(rs.getString("StudentName"));
+				sdto.setDateofbirth(rs.getString("DateofBirth"));
+				sdto.setAddress(rs.getString("Address"));
+				sdto.setPhone(rs.getInt("PhoneNumber"));
+				sdto.setImage(rs.getString("Image"));
+				sdto.setStatus(rs.getString("Status"));
+				sdto.setEmail(rs.getString("Email"));
+				slist.add(sdto);
+			}
+			st.close();
+		}
+
+		catch (SQLException e) {
+			String error = "Student cannot be selected. Nested Exception is: " + e;
+			throw new DAOException(error);
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		return slist;
+	}
 
 }

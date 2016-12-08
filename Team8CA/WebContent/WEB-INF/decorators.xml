@@ -3,7 +3,4 @@
     <decorator name="basic-theme" page="basic-theme.jsp">
         <pattern>/view/*</pattern>
     </decorator>
-    <decorator name="lecturer-theme" page="lecturer-theme.jsp">
-        <pattern>/viewlecturer/*</pattern>
-    </decorator>
  </decorators>

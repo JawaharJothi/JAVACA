@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.LecturerDTO;
 import service.LecturerManager;
@@ -45,6 +46,7 @@ public class LoadLecturer extends HttpServlet {
 	}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		LecturerManager lm = new LecturerManager();
 		ArrayList<LecturerDTO> list = lm.findallLecturer();
 		request.setAttribute("lecturers", list);

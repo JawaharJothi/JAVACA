@@ -23,6 +23,14 @@
 
 </head>
 <body>
+<%
+    session=request.getSession(false);
+    if(session.getAttribute("profile")==null)
+    {
+        response.sendRedirect(request.getContextPath()+"/LogIn.jsp");
+    }
+
+%>
 	<div id="page-wrapper">
 		<div class="row">
 			<div class="col-lg-12">
@@ -75,7 +83,7 @@
 								<td>${lecturer.email }</td>
 								<td>${lecturer.degree }</td>
 								<td><c:url var="updurl" scope="page"
-										value="/view/LecturerSetup.jsp">
+										value="/team8//classenrolllist">
 										<c:param name="id" value="${lecturer.lecturerID  }" />
 										<c:param name="name" value="${lecturer.lecturername }" />
 										<c:param name="dob" value="${lecturer.dob }" />

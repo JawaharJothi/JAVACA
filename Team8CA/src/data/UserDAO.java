@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import model.User;
 
 public interface UserDAO {
-	
+
 	public abstract User createValueObject();
-	
-	public abstract ArrayList<User> searchMatching(Connection conn,
-			User valueObject) throws SQLException;
+
+	public  User searchMatching(User valueObject) throws DAOException;
 }

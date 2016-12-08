@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import data.DAOException;
 import data.DaoFactory;
 import data.UserDAO;
 import exception.NotFoundException;
@@ -14,36 +15,27 @@ public class UserService {
 	private Connection conn;
 	private UserDAO udao;
 
-	public UserService() throws NotFoundException {
+	public UserService(){
 		// TODO Auto-generated constructor stub
 		super();
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team8", "root", "password");
-			this.udao = DaoFactory.getUserDao();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new NotFoundException("Driver Fault");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new NotFoundException("SQL Fault");
-		}
+		this.udao = DaoFactory.getUserDao();
 	}
 	
-	public boolean authenticate(User u) throws NotFoundException {
-		try {
-			ArrayList<User> list = this.udao.searchMatching(this.conn, u);
-			if (list.size() > 0)
-				return true;
-			else
-				return false;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+
+		@SuppressWarnings("finally")
+		public User authenticate(User u) {
+			User list = new User();
+			try {
+				list = this.udao.searchMatching(u);
+
+			} catch (DAOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				return list;
+			}
+
+		
 
 	}
 
