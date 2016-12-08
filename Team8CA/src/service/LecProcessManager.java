@@ -8,6 +8,7 @@ import data.LecProcessDAO;
 import data.StudentGradingDAO;
 import model.ClassCourseDTO;
 import model.StudentGradingDTO;
+import model.StudentPerformanceDTO;
 
 public class LecProcessManager {
 	private LecProcessDAO lecturerprocessDAO;
@@ -55,6 +56,19 @@ public class LecProcessManager {
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public ArrayList<StudentPerformanceDTO> findstudentperformance(String id){
+		ArrayList<StudentPerformanceDTO> splist= new ArrayList<StudentPerformanceDTO>();
+		try {
+			splist=lecturerprocessDAO.findsperformancelist(id);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			return splist;
 		}
 	}
 

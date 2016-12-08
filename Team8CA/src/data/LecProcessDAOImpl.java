@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.ClassCourseDTO;
+import model.StudentPerformanceDTO;
 
 
 public class LecProcessDAOImpl implements LecProcessDAO{
@@ -54,6 +55,47 @@ public class LecProcessDAOImpl implements LecProcessDAO{
 			}
 		}
 		return classcourse;
+	}
+	@Override
+	public ArrayList<StudentPerformanceDTO> findsperformancelist(String id) throws DAOException {
+		ArrayList<StudentPerformanceDTO> slist = new ArrayList<StudentPerformanceDTO>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		String sql = "select * from student s, class c,  student_enrolment se where s.MatricNumber=se.MatricNumber AND se.ClassID=c.ClassID AND s.MatricNumber='"+id+"'";
+		Connection con = null;
+
+		try {
+			con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			
+			while (rs.next()) {
+				StudentPerformanceDTO splist = new StudentPerformanceDTO();
+				splist.setMatricno(rs.getString("MatricNumber"));
+				splist.setStudentname(rs.getString("StudentName"));
+				splist.setStartDate(rs.getString("StartDate"));
+				splist.setEndDate(rs.getString("EndDate"));
+				splist.setCourseName(rs.getString("CourseName"));
+				splist.setGrade(rs.getString("Grade"));
+				slist.add(splist);
+			
+			}
+			st.close();
+		} catch (SQLException e) {
+			String error = "Error selecting Student Performance list. Nested Exception is: " + e;
+			throw new DAOException(error);
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		return slist;
 	}
 
 	

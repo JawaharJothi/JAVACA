@@ -54,10 +54,10 @@
 											class="form-control" type="text" value="${param['name']}" maxlength="150">
 									</div>
 									<div class="form-group">
-										<label><fmt:message key="setup.dob" /></label> <input name="dob"
+										<label><fmt:message key="setup.dob" /></label><%--  <input name="dob"
 											class="form-control" type="text" placeholder="yyyy-MM-dd"
-											value="${param['dob']}">
-											<input type="date" class="form-control">
+											value="${param['dob']}"> --%>
+											<input type="date" name="dob" class="form-control" value="${param['dob']}">
 									</div>
 									<div class="form-group">
 										<label><fmt:message key="setup.phnumber" /></label> <input name="phone"

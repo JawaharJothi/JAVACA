@@ -79,7 +79,7 @@
 				
 			</table>
 			<input class="form-control" type="hidden" name="CID" value="${cid }">
-			<input type="submit" class="btn-primary">
+			<input type="submit" class="btn btn-primary">
 		</div>
 		</form>
 	</div>
