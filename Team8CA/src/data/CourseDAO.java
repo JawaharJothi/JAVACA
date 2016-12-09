@@ -10,6 +10,10 @@ public interface CourseDAO {
 
 	void insertCourse(CourseDTO course) throws DAOException;
 
-	
+	CourseDTO findOneCourse(CourseDTO course) throws DAOException;
+
+	int updateCourse(CourseDTO course) throws DAOException;
+
+	boolean deleteCourse(CourseDTO course) throws DAOException;
 
 }
