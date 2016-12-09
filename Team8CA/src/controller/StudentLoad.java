@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import data.DAOException;
 import model.StudentDTO;
 import service.StudentManager;
 
@@ -27,12 +28,21 @@ public class StudentLoad extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
+    int page = 1;
+    int recordsPerPage = 10;
+  
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request, response);
+		try {
+			doProcess(request, response);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -40,12 +50,29 @@ public class StudentLoad extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doProcess(request, response);
+		try {
+			doProcess(request, response);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, DAOException {
+
+int page = 1;
+		int recordsPerPage = 8;
+		if (request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
+		
 		StudentManager sm = new StudentManager();
-		ArrayList<StudentDTO> slist = sm.findallStudents();
+		ArrayList<StudentDTO> slist = sm.findallStudents( (page - 1) * recordsPerPage,
+				recordsPerPage);
+		int noOfRecords = sm.gtnoofrecord();
+		int noOfPages = (int) Math.ceil(noOfRecords*1.0/recordsPerPage);
 		request.setAttribute("students", slist);
+		request.setAttribute("noOfPages", noOfPages);
+		request.setAttribute("currentPage", page);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/view/Student.jsp");
 		try {
 			rd.forward(request, response);
@@ -56,6 +83,10 @@ public class StudentLoad extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if (request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
+		
 
 	}
 

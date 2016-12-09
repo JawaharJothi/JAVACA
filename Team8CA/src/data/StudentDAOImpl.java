@@ -20,7 +20,7 @@ public class StudentDAOImpl implements StudentDAO {
 	private static final String dbPassword = "password";
 
 	@Override
-	public ArrayList<StudentDTO> findallstudents() throws DAOException {
+	public ArrayList<StudentDTO> findallstudents( int offset, int noOfRecords) throws DAOException {
 		// TODO Auto-generated method stub
 		ArrayList<StudentDTO> slist = new ArrayList<StudentDTO>();
 
@@ -33,7 +33,7 @@ public class StudentDAOImpl implements StudentDAO {
 			e.printStackTrace();
 		}
 
-		String sql = "SELECT * FROM team8.student s, team8.user u where s.MatricNumber=u.userid;";
+		String sql = "select * from student LIMIT " + offset + ", " + noOfRecords;
 		Connection con = null;
 
 		try {
@@ -53,6 +53,8 @@ public class StudentDAOImpl implements StudentDAO {
 				slist.add(sdto);
 			}
 			st.close();
+			
+			
 		}
 
 		catch (SQLException e) {
@@ -146,7 +148,7 @@ public class StudentDAOImpl implements StudentDAO {
 				sdto.setEmail(rs.getString("Email"));
 
 			}
-			
+			System.out.println(sdto.getStudentname());
 
 		} catch (Exception e) {
 			String error = "Error selecting student. Nested Exception is: " + e;
@@ -247,11 +249,48 @@ public class StudentDAOImpl implements StudentDAO {
 
 	}
 
+
+
+
 	@Override
-	public StudentDTO findallstudents(String matric) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getNoOfRecords() throws DAOException {
+		int i =0;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+
+		catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+
+		Connection con = null;
+
+		try {
+			con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+			Statement st = con.createStatement();
+			ResultSet rs =  st.executeQuery("select count(*) from student");
+			if (rs.next()) {
+				
+				i=rs.getInt(1);
+			}
+			rs.close();
+
+		}
+
+		catch (SQLException e) {
+			String error = "Student cannot be selected. Nested Exception is: " + e;
+			throw new DAOException(error);
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		return i;
 	}
+
 
 
 }

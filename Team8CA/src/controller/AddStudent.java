@@ -68,8 +68,22 @@ public class AddStudent extends HttpServlet {
 			
 			sm.updateStudent(sdto);
 		}
-		ArrayList<StudentDTO> data = sm.findallStudents();
-		request.setAttribute("students", data);
+		int page = 1;
+		int recordsPerPage = 8;
+		if (request.getParameter("page") != null){
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		else{
+			page =1;
+		}
+		ArrayList<StudentDTO> slist = sm.findallStudents( (page - 1) * recordsPerPage,
+				recordsPerPage);
+		int noOfRecords = sm.gtnoofrecord();
+		int noOfPages = (int) Math.ceil(noOfRecords*1.0/recordsPerPage);
+		request.setAttribute("students", slist);
+		request.setAttribute("noOfPages", noOfPages);
+		request.setAttribute("currentPage", page);
+
 		RequestDispatcher rd = request.getRequestDispatcher("/view/Student.jsp");
 		try {
 			rd.forward(request, response);

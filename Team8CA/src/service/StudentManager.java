@@ -2,6 +2,8 @@ package service;
 
 import java.util.ArrayList;
 
+import com.sun.xml.internal.messaging.saaj.util.FinalArrayList;
+
 import data.DAOException;
 import data.DaoFactory;
 import data.StudentDAO;
@@ -17,10 +19,10 @@ public class StudentManager {
 	}
 
 	@SuppressWarnings("finally")
-	public ArrayList<StudentDTO> findallStudents() {
+	public ArrayList<StudentDTO> findallStudents( int offset, int noOfRecords) {
 		ArrayList<StudentDTO> slist = new ArrayList<StudentDTO>();
 		try {
-			slist = studentDAO.findallstudents();
+			slist = studentDAO.findallstudents( offset, noOfRecords);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -60,18 +62,8 @@ public class StudentManager {
 		}
 	}
 
-	@SuppressWarnings("finally")
-	public StudentDTO findallStudents(String matric) throws DAOException {
-		// TODO Auto-generated method stub
-		StudentDTO sdto = new StudentDTO();
-		try {
-			sdto=studentDAO.findallstudents(matric);
-		}finally
-		{
-			return sdto;
-		
-	}
-	}
+
+
 
 	@SuppressWarnings("finally")
 	public StudentDTO findstudent(String matric) {
@@ -87,6 +79,19 @@ public class StudentManager {
 		}finally
 		{
 			return sdto;
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public int gtnoofrecord(){
+		int i =0;
+		try {
+			i = studentDAO.getNoOfRecords();
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			return i;
 		}
 	}
 }

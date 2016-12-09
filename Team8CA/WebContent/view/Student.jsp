@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,76 +41,105 @@
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
-				<c:url var="url" scope="page" value="/view/StudentSetup.jsp">
-					<c:param name="id" value="" />
-					<c:param name="name" value="" />
-					<c:param name="dob" value="" />
-					<c:param name="phnumber" value="" />
-					<c:param name="address" value="" />
-					<c:param name="email" value="" />
-					<c:param name="edu" value=""></c:param>
-					<c:param name="password" value=""></c:param>
-					<c:param name="insert" value="true" />
-				</c:url>
-			<a href="${url}" ><fmt:message key="label.student.add" /></a> 
-			
-			
+					<c:url var="url" scope="page" value="/view/StudentSetup.jsp">
+						<c:param name="id" value="" />
+						<c:param name="name" value="" />
+						<c:param name="dob" value="" />
+						<c:param name="phnumber" value="" />
+						<c:param name="address" value="" />
+						<c:param name="email" value="" />
+						<c:param name="edu" value=""></c:param>
+						<c:param name="password" value=""></c:param>
+						<c:param name="insert" value="true" />
+					</c:url>
+					<a href="${url}" class="btn btn-primary"><fmt:message
+							key="label.student.add" /></a>
+
+
 					<table class="table">
 						<thead>
 							<tr>
-							
+
 								<th>#</th>
-								<th><fmt:message key="label.student.name"/></th>
-								<th><fmt:message key="label.student.dob"/></th>
-								<th><fmt:message key="label.student.phnumber"/></th>
-								<th><fmt:message key="label.student.address"/></th>
-								<th><fmt:message key="label.student.email"/></th>
-							
-								<th><fmt:message key="label.student.status"/></th>
-								<th><fmt:message key="label.student.edit"/></th>
-								<th><fmt:message key="label.student.delete"/></th>
-								
+								<th><fmt:message key="label.student.matric"></fmt:message></th>
+								<th><fmt:message key="label.student.name" /></th>
+								<th><fmt:message key="label.student.dob" /></th>
+								<th><fmt:message key="label.student.phnumber" /></th>
+								<th><fmt:message key="label.student.address" /></th>
+								<th><fmt:message key="label.student.email" /></th>
+
+								<th><fmt:message key="label.student.status" /></th>
+								<th><fmt:message key="label.student.edit" /></th>
+								<th><fmt:message key="label.student.delete" /></th>
+
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="student" items="${students}" varStatus="status">
-							<tr class="${status.index%2==0?'even':'odd'}">
-								<td>${status.index + 1}</td>
-								<td style="display: none;">${student.matricno }</td>
-								<td>${student.studentname }</td>
-								<td>${student.dateofbirth }</td>
-								<td>${student.phone }</td>
-								<td>${student.address }</td>
-								<td>${student.email }</td>
-								
-								<td>${student.status}</td>
-								<td><c:url var="updurl" scope="page"
-										value="/view/StudentSetup.jsp">
-										<c:param name="id" value="${student.matricno }" />
-										<c:param name="name" value="${student.studentname}" />
-										<c:param name="dob" value="${student.dateofbirth}" />
-										<c:param name="phnumber" value="${student.phone }" />
-										<c:param name="address" value="${student.address }" />
-										<c:param name="email" value="${student.email}" />
-										<c:param name="edu" value="${student.image }" />
-										<c:param name="edu" value="${student.status }" />
-										<c:param name="password" value="${student.password }" />
-										<c:param name="update" value="true" />
-									</c:url> <a href="${updurl}"><fmt:message key="label.student.edit" /></a>
-								</td>
-								<td><c:url var="delurl" scope="page"
-										value="/DeleteStudent">
-										<c:param name="matricnumber" value="${student.matricno}" />
-									</c:url> <a href="${delurl}"><fmt:message
-											key="label.student.delete" /></a></td>
-							</tr>
-						</c:forEach>
+								<tr class="${status.index%2==0?'even':'odd'}">
+									<td>${status.index + 1}</td>
+									<td style="display:;">${student.matricno }</td>
+									<td>${student.studentname }</td>
+									<td>${student.dateofbirth }</td>
+									<td>${student.phone }</td>
+									<td>${student.address }</td>
+									<td>${student.email }</td>
+
+									<td>${student.status}</td>
+									<td><c:url var="updurl" scope="page"
+											value="/view/StudentSetup.jsp">
+											<c:param name="id" value="${student.matricno }" />
+											<c:param name="name" value="${student.studentname}" />
+											<c:param name="dob" value="${student.dateofbirth}" />
+											<c:param name="phnumber" value="${student.phone }" />
+											<c:param name="address" value="${student.address }" />
+											<c:param name="email" value="${student.email}" />
+											<c:param name="edu" value="${student.image }" />
+											<c:param name="edu" value="${student.status }" />
+											<c:param name="password" value="${student.password }" />
+											<c:param name="page" value="${param['page'] }" />
+											<c:param name="update" value="true" />
+										</c:url> <a href="${updurl}" class="btn btn-primary"><fmt:message
+												key="label.student.edit" /></a></td>
+									<td><c:url var="delurl" scope="page"
+											value="/DeleteStudent">
+											<c:param name="matricnumber" value="${student.matricno}" />
+										</c:url> <a href="${delurl}" class="btn btn-primary"><fmt:message
+												key="label.student.delete" /></a></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 				<!-- /.col-lg-12 -->
+
 			</div>
 			<!-- /.row -->
+			<div class="row">
+
+				<div class="col-lg-12">
+
+					<%--For displaying Page numbers. The when condition does not display a link for the current page--%>
+					<ul class="pagination">
+
+						<c:forEach begin="1" end="${noOfPages}" var="i">
+							<c:choose>
+								<c:when test="${currentPage eq i}">
+									<li class="active"><a>${i}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><c:url var="urln" scope="page" value="/sload">
+
+											<c:param name="page" value="${i}" />
+
+
+										</c:url> <a href="${urln}">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
 		</div>
 		<!-- /#page-wrapper -->
 
