@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.ClassDAO;
+import data.StudentClassDAO;
+import data.StudentClassDAOImpl;
+import data.DAOException;
 import data.DaoFactory;
-import model.ClassDTO;
+import model.StudentClassDTO;
 import service.ClassManager;
-
 
 /**
  * Servlet implementation class LoadClass
@@ -22,53 +23,67 @@ import service.ClassManager;
 @WebServlet("/LoadClass")
 public class LoadClass extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoadClass() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoadClass() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			doProcess(request, response);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			doProcess(request, response);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, DAOException {
 		String path = "/view/StudentClass.jsp";
-		
-		
-		ArrayList<ClassDTO> classList = null;
-		
+
+		ArrayList<StudentClassDTO> classList = null;
+		System.out.println("aaaaa");
 		ClassManager classManager = new ClassManager();
+		System.out.println("bbbb");
+		ArrayList<StudentClassDTO> takenclass = new ArrayList<StudentClassDTO>();
+		takenclass = classManager.gettakenclass("E0090");
+
+		classList = classManager.checkCourse(classManager.getUntakenClassesWithNumberEnrolled("E0090"), takenclass);
+		System.out.println("eeeee");
+		 for(StudentClassDTO c: classList){
 		
-		classList = classManager.getUntakenClassesWithNumberEnrolled("E0090");
+		 System.out.println(c.getClassID());
+		 System.out.println(c.getCourseName());
+		 System.out.println(c.getStartDate());
+		 System.out.println(c.getEndDate());
+		 System.out.println(c.getCredit());
+		 System.out.println(c.getClassSize());
+		 }
 		
-//		for(ClassDTO c: classList){
-//			
-//			System.out.println(c.getClassID());
-//			System.out.println(c.getCourseName());
-//			System.out.println(c.getStartDate());
-//			System.out.println(c.getEndDate());
-//			System.out.println(c.getCredit());
-//			System.out.println(c.getClassSize());
-//		}
-//		
-		
-		
+
 		request.setAttribute("classList", classList);
-//		request.setAttribute("numberEnrolledList", numberEnrolledList);
+		// request.setAttribute("numberEnrolledList", numberEnrolledList);
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
-		
-		
+
 	}
 }

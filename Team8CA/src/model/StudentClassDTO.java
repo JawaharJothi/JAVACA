@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-public class ClassDTO {
+public class StudentClassDTO {
 	private String classID;
 	private String courseName;
 	private Date startDate;
@@ -23,7 +23,7 @@ public class ClassDTO {
 	}
 
 
-	public ClassDTO() {
+	public StudentClassDTO() {
 		super();
 	}
 	

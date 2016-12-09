@@ -22,14 +22,21 @@
 	rel="stylesheet" />
 
 </head>
+<script type="text/javascript">
+	function check(v1, v2) {
+		document.getElementById(v2).disabled = true;
+		//if(document.getElementById(v1).value == "wer")
+		window.alert(v1);
+	}
+</script>
 <body>
 	<div id="page-wrapper">
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">
-					<fmt:message key="label.classes"/>
+					<fmt:message key="label.classes" />
 					<!-- <fmt:message key="label.lecturer" /> -->
-					
+
 				</h1>
 			</div>
 			<!-- /.col-lg-12 -->
@@ -48,15 +55,13 @@
 							<th><fmt:message key="label.classes.startdate" /></th>
 							<th><fmt:message key="label.classes.enddate" /></th>
 							<th><fmt:message key="label.classes.classsize" /></th>
-							<th><fmt:message key="label.classes.numberenrolled"/></th>
-						
-							
-							
-
+							<th><fmt:message key="label.classes.numberenrolled" /></th>
+							<th><fmt:message key="label.classes.enrollment"></fmt:message>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="classz" items="${classList}" varStatus="status">
+
 							<tr class="${status.index%2==0?'even':'odd'}">
 								<td>${status.index + 1}</td>
 								<td>${classz.classID}</td>
@@ -65,13 +70,15 @@
 								<td>${classz.startDate}</td>
 								<td>${classz.endDate}</td>
 								<td>${classz.classSize}</td>
-								<td>${classz.numberEnrolled }</td>
+								<td>${classz.numberEnrolled}</td>
+								<td><a
+									href="StudentEnrolment?id=${classz.classID}&courseName=${classz.courseName}&credit=${classz.credit}&startDate=${classz.startDate}&endDate=${classz.endDate}&classSize=${classz.classSize}&numberEnrolled=${classz.numberEnrolled}">enroll</a></td>
 							</tr>
 						</c:forEach>
-						
+
 					</tbody>
 				</table>
-				
+
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
