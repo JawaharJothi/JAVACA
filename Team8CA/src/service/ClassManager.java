@@ -1,61 +1,64 @@
 package service;
 
-
 import java.util.ArrayList;
 
-import org.omg.PortableServer.ThreadPolicyOperations;
-
-import data.StudentClassDAO;
+import data.ClassDAO;
 import data.DAOException;
 import data.DaoFactory;
-import model.StudentClassDTO;
+import model.ClassDTO;
 
 public class ClassManager {
-	private StudentClassDAO classDAO;
+	private ClassDAO classDAO;
 
 	public ClassManager() {
-		super();
-		classDAO = DaoFactory.getClassDAO();
-	}
-	
-	private ArrayList<StudentClassDTO> getUntakenClasses(String matricNumber) throws DAOException{
-		return classDAO.getUntakenClasses(matricNumber);
+		classDAO = DaoFactory.getClassDao();
 	}
 
-	public ArrayList<StudentClassDTO> getUntakenClassesWithNumberEnrolled(String matricNumber) throws DAOException{
-		return classDAO.getNumberEnrolled(classDAO.getUntakenClasses(matricNumber));
-	}
-	public ArrayList<StudentClassDTO> gettakenclass(String matricNumber) throws DAOException{
-		ArrayList<StudentClassDTO> taken = new ArrayList<StudentClassDTO>();
+	public ArrayList<ClassDTO> findAllClass() {
 		
-		return classDAO.getNumberEnrolled(classDAO.getUntakenClasses(matricNumber)) ;
-	}
-	
-	
-	public ArrayList<StudentClassDTO> gettakenClasses(String matricNumber) throws DAOException{
-		ArrayList<StudentClassDTO> classlist = new ArrayList<StudentClassDTO>();
-		classlist = classDAO.gettakenClasses(matricNumber);
-		return classlist;
-	}
-	
-	public ArrayList<StudentClassDTO> checkCourse(ArrayList<StudentClassDTO> list, ArrayList<StudentClassDTO> classTakenlist) {
-		System.out.println("zzzzz");
-		ArrayList<StudentClassDTO> newList = new ArrayList<StudentClassDTO>();
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).getNumberEnrolled() < list.get(i).getClassSize()) {
-				if(classTakenlist.size() == 0) {
-					newList.add(list.get(i));
-				}
-				for(int j = 0; j < classTakenlist.size(); j++) {
-					if(classTakenlist.get(j).getStartDate().after(list.get(i).getEndDate()) || classTakenlist.get(j).getEndDate().before(list.get(i).getStartDate())) {
-						newList.add(list.get(i));
-					}
-				}
+			ArrayList<ClassDTO> clst = new ArrayList<ClassDTO>();
+			try {
+				clst = classDAO.findAllClass();
+			} catch (DAOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}
+			return clst;
 		
-		return newList;
 		
 	}
-	
+	public void insertClass(ClassDTO cls) {
+		try {
+			classDAO.insertClass(cls);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void DeleteClass(ClassDTO cls) {
+		try {
+			classDAO.DeleteClass(cls);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public ClassDTO FindClass(String cid) {
+		ClassDTO cto = new ClassDTO();
+		try {
+			cto = classDAO.FindClass(cid);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cto;
+	}
+	public void UpdateClass(ClassDTO cls){
+		try {
+			classDAO.UpdateClass(cls);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

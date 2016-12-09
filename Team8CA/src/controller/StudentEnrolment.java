@@ -14,7 +14,7 @@ import data.StudentClassDAOImpl;
 import data.DAOException;
 import model.StudentClassDTO;
 import model.StudentEnrolmentDTO;
-import service.ClassManager;
+import service.StudentClassManager;
 import service.StudentEnrolmentManager;
 import service.StudentManager;
 
@@ -62,7 +62,7 @@ public class StudentEnrolment extends HttpServlet {
 		sem.addEnrollment(sed);
 		
 		ArrayList<StudentClassDTO> classList = null;
-		ClassManager classManager = new ClassManager();
+		StudentClassManager classManager = new StudentClassManager();
 		try {
 			classList = classManager.checkCourse(classManager.getUntakenClassesWithNumberEnrolled("E0090"), new StudentClassDAOImpl().gettakenClasses("E0090"));
 		} catch (DAOException e) {

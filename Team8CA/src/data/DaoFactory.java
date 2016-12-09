@@ -41,4 +41,14 @@ public class DaoFactory {
 		return sedao;
 
 	}
+	
+	public static ClassDAO getClassDao(){
+		ClassDAO cdao = new ClassDAOImpl();
+		return cdao;
+				
+	}
+	
+	public static CourseDAO getCourseDAO(){
+		return new CourseDAOImpl();
+	}
 }

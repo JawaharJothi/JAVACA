@@ -15,7 +15,7 @@ import data.StudentClassDAOImpl;
 import data.DAOException;
 import data.DaoFactory;
 import model.StudentClassDTO;
-import service.ClassManager;
+import service.StudentClassManager;
 
 /**
  * Servlet implementation class LoadClass
@@ -62,7 +62,7 @@ public class LoadClass extends HttpServlet {
 
 		ArrayList<StudentClassDTO> classList = null;
 		System.out.println("aaaaa");
-		ClassManager classManager = new ClassManager();
+		StudentClassManager classManager = new StudentClassManager();
 		System.out.println("bbbb");
 		ArrayList<StudentClassDTO> takenclass = new ArrayList<StudentClassDTO>();
 		takenclass = classManager.gettakenclass("E0090");
