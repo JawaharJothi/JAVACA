@@ -61,4 +61,9 @@ public class ClassManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public ArrayList<ClassDTO> getClassesWithNumberEnrolled(String matricNumber){
+		System.out.println("mmmmddd");
+		return classDAO.getClassesEnrolled(matricNumber);
+	}
 }

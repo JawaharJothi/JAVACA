@@ -15,5 +15,7 @@ public interface ClassDAO {
 	ClassDTO FindClass(String cid) throws DAOException;
 
 	void UpdateClass(ClassDTO cls) throws DAOException;
+	
+	 ArrayList<ClassDTO> getClassesEnrolled(String matricNumber);
 
 }

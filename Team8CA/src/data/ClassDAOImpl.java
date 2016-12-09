@@ -222,5 +222,80 @@ public class ClassDAOImpl implements ClassDAO {
 		}
 
 	}
+	
+	
+	//Establishes Connection
+	private Connection openConnection(){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Connection connection = null;
+		try {
+			connection=DriverManager.getConnection("jdbc:mysql://localhost/team8","root","password");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return connection;
+		
+	}
+	
+
+	@Override
+	public ArrayList<ClassDTO> getClassesEnrolled(String matricNumber) {
+		// TODO Auto-generated method stub
+		System.out.println("DAO");
+		
+		ArrayList<ClassDTO> classList=null;
+		Connection connection = openConnection();
+		PreparedStatement ps = null;
+		
+		String string = "SELECT * FROM team8.class where ClassID in(SELECT ClassID FROM team8.student_enrolment where status='Enrolled' and MatricNumber=?);";
+		try {
+			classList = new ArrayList<ClassDTO>();
+			ps = connection.prepareStatement(string);
+			ps.setString(1, matricNumber);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				
+				ClassDTO classDTO=new ClassDTO();
+				classDTO.setClassID(rs.getString("ClassID"));
+				classDTO.setCourseName(rs.getString("CourseName"));
+				classDTO.setStartDate(rs.getString("StartDate"));
+				classDTO.setEndDate(rs.getString("EndDate"));
+				classDTO.setCredit(rs.getString("Credit"));
+				classDTO.setClassSize(rs.getInt("ClassSize"));
+				classList.add(classDTO);
+				
+			}
+			
+			connection.commit();
+		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+			
+				e1.printStackTrace();
+			}	
+			e.printStackTrace();
+		} finally{
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+			
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return classList;
+	}
 	}
 

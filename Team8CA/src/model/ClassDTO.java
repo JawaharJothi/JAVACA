@@ -7,19 +7,36 @@ public class ClassDTO {
 	private String endDate;
 	private String credit;
 	private String courseName;
+	private int numberEnrolled;
+
+	
 	public ClassDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ClassDTO(String classID, int classSize, String startDate, String endDate, String credit, String courseName) {
-		super();
+	
+	public ClassDTO(String classID, int classSize, String startDate, String endDate, String credit, String courseName,
+			int numberEnrolled){
 		this.classID = classID;
 		this.classSize = classSize;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.credit = credit;
 		this.courseName = courseName;
+		this.numberEnrolled = numberEnrolled;
+
 	}
+
+	public int getNumberEnrolled() {
+		return numberEnrolled;
+	}
+
+	public void setNumberEnrolled(int numberEnrolled) {
+		this.numberEnrolled = numberEnrolled;
+	}
+
+
+
 	public String getClassID() {
 		return classID;
 	}
@@ -56,10 +73,6 @@ public class ClassDTO {
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
-	@Override
-	public String toString() {
-		return "ClassDTO [classID=" + classID + ", classSize=" + classSize + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", credit=" + credit + ", courseName=" + courseName + "]";
-	}
+
 	
 }
