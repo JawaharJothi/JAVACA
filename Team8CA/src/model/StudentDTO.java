@@ -12,6 +12,19 @@ public class StudentDTO {
 	private String image;
 	private String status;
 	private String password;
+	private int page;
+
+	public int getPage() {
+		return page;
+	}
+
+
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+
 
 	public StudentDTO(String matricno, String studentname, String dateofbirth, int phone, String address,
 			String email, String image, String status,String password) {

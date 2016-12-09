@@ -74,16 +74,30 @@ public class LecProcessManager {
 	}
 	
 	@SuppressWarnings("finally")
-	public ArrayList<StudentDTO> findenrollstudent(String id){
+	public ArrayList<StudentDTO> findenrollstudent(String id, int offset, int noOfRecords){
 		ArrayList<StudentDTO> slist = new ArrayList<StudentDTO>();
 		try {
-			slist = lecturerprocessDAO.findallstudents(id);
+			slist = lecturerprocessDAO.findallstudents(id, offset, noOfRecords);
 		} catch (DAOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			return slist;
 		}
+	}
+	
+	@SuppressWarnings("finally")
+	public int getnoofrecord(String id){
+		int i=0;
+		try {
+			 i = lecturerprocessDAO.getNoOfRecords(id);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			return i;
+		}
+		
 	}
 
 }

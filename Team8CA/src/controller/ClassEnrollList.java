@@ -20,36 +20,53 @@ import service.StudentManager;
 @WebServlet("/classenrolllist")
 public class ClassEnrollList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ClassEnrollList() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ClassEnrollList() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
-	
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int page = 1;
+		int recordsPerPage = 3;
+		if (request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
+
 		LecProcessManager lpm = new LecProcessManager();
-		ArrayList<StudentDTO> slist = lpm.findenrollstudent(request.getParameter("id"));
+		ArrayList<StudentDTO> slist = lpm.findenrollstudent(request.getParameter("id"), (page - 1) * recordsPerPage,
+				recordsPerPage);
+		
+		int noOfRecords=lpm.getnoofrecord(request.getParameter("id"));
+		int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+		
 		request.setAttribute("students", slist);
+		 request.setAttribute("noOfPages", noOfPages);
+	        request.setAttribute("currentPage", page);
 		RequestDispatcher rd = request.getRequestDispatcher("/view/ClassEnrollList.jsp");
 		try {
 			rd.forward(request, response);
