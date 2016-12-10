@@ -14,6 +14,7 @@ import data.StudentClassDAOImpl;
 import data.DAOException;
 import model.StudentClassDTO;
 import model.StudentEnrolmentDTO;
+import model.User;
 import service.StudentClassManager;
 import service.StudentEnrolmentManager;
 import service.StudentManager;
@@ -53,10 +54,12 @@ public class StudentEnrolment extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("11111111");
+		
+		User user = new User();
+		user = (User)request.getSession().getAttribute("profile");
 		StudentEnrolmentDTO sed=new StudentEnrolmentDTO();
 		sed.setClassid(request.getParameter("id"));
-		sed.setMatricnumber("E0090");
+		sed.setMatricnumber(user.getUserID());
 		
 		StudentEnrolmentManager sem = new StudentEnrolmentManager();
 		sem.addEnrollment(sed);
@@ -64,8 +67,8 @@ public class StudentEnrolment extends HttpServlet {
 		ArrayList<StudentClassDTO> classList = null;
 		StudentClassManager classManager = new StudentClassManager();
 		try {
-			classList = classManager.checkCourse(classManager.getUntakenClassesWithNumberEnrolled("E0090"), new StudentClassDAOImpl().gettakenClasses("E0090"));
-		} catch (DAOException e) {
+			classList = classManager.showClassList(user.getUserID());
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

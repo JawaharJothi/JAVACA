@@ -23,7 +23,7 @@ public class StudentClassDAOImpl implements StudentClassDAO {
 		}
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/team8", "root", "password");
+			connection = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -39,7 +39,7 @@ public class StudentClassDAOImpl implements StudentClassDAO {
 		ArrayList<StudentClassDTO> classList = null;
 		Connection connection = openConnection();
 		PreparedStatement ps = null;
-		String string = "SELECT * FROM team8.class where ClassID in(SELECT ClassID FROM team8.student_enrolment where status='completed' and MatricNumber=?);";
+		String string = "SELECT * FROM team8.class where ClassID in(SELECT ClassID FROM team8.student_enrolment where status = 'Enrolled' and MatricNumber=?);";
 		try {
 			classList = new ArrayList<StudentClassDTO>();
 			connection.setAutoCommit(false);
@@ -79,7 +79,7 @@ public class StudentClassDAOImpl implements StudentClassDAO {
 			}
 
 		}
-
+		System.out.println("--------------------------takenclass:" + classList.size());
 		return classList;
 
 	}
@@ -133,11 +133,10 @@ public class StudentClassDAOImpl implements StudentClassDAO {
 	@Override
 	public ArrayList<StudentClassDTO> getUntakenClasses(String matricNumber) throws DAOException {
 		// TODO Auto-generated method stub
-		System.out.println("untaken");
 		ArrayList<StudentClassDTO> classList = null;
 		Connection connection = openConnection();
 		PreparedStatement ps = null;
-		String string = "SELECT * FROM team8.class where ClassID not in(SELECT ClassID FROM team8.student_enrolment where status='Enrolled' and MatricNumber=?);";
+		String string = "SELECT * FROM team8.class where ClassID not in(SELECT ClassID FROM team8.student_enrolment where (status='Completed' or status = 'Enrolled') and MatricNumber=?);";
 		try {
 			classList = new ArrayList<StudentClassDTO>();
 			connection.setAutoCommit(false);

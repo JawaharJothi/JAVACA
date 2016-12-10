@@ -77,7 +77,7 @@ public class Authentication extends HttpServlet {
 			}
 			
 			if(user.getRole().equalsIgnoreCase("student")){
-				RequestDispatcher rd = request.getRequestDispatcher("/loadclass");
+				RequestDispatcher rd = request.getRequestDispatcher("/LoadClass");
 				rd.forward(request, response);
 			}
 		}

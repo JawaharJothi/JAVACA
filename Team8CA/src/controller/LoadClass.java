@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.StudentClassDAO;
-import data.StudentClassDAOImpl;
+
 import data.DAOException;
-import data.DaoFactory;
+
 import model.StudentClassDTO;
+import model.User;
 import service.StudentClassManager;
 
 /**
@@ -60,28 +60,19 @@ public class LoadClass extends HttpServlet {
 			throws ServletException, IOException, DAOException {
 		String path = "/view/StudentClass.jsp";
 
-		ArrayList<StudentClassDTO> classList = null;
-		System.out.println("aaaaa");
+		//Retrieves User by using HTTPSession established
+		User user = new User();
+		user = (User)request.getSession().getAttribute("profile");
+		
+		//Creates new classManager service class to access list of available courses
 		StudentClassManager classManager = new StudentClassManager();
-		System.out.println("bbbb");
-		ArrayList<StudentClassDTO> takenclass = new ArrayList<StudentClassDTO>();
-		takenclass = classManager.gettakenclass("E0090");
-
-		classList = classManager.checkCourse(classManager.getUntakenClassesWithNumberEnrolled("E0090"), takenclass);
-		System.out.println("eeeee");
-		 for(StudentClassDTO c: classList){
 		
-		 System.out.println(c.getClassID());
-		 System.out.println(c.getCourseName());
-		 System.out.println(c.getStartDate());
-		 System.out.println(c.getEndDate());
-		 System.out.println(c.getCredit());
-		 System.out.println(c.getClassSize());
-		 }
+		ArrayList<StudentClassDTO> classList = classManager.showClassList(user.getUserID());
 		
-
+		//stores in request so as to enable usage in forwarded jsp
 		request.setAttribute("classList", classList);
-		// request.setAttribute("numberEnrolledList", numberEnrolledList);
+		
+		//creates a dispatcher and forwards to jsp page
 		RequestDispatcher rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
 
