@@ -55,6 +55,9 @@
 							<th><fmt:message key="label.class.edate" /></th>
 							<th><fmt:message key="label.class.credit" /></th>
 							<th><fmt:message key="label.class.course" /></th>
+							<th><fmt:message key="label.course.edit" /></th>
+							<th><fmt:message key="label.course.delete" /></th>
+							
 						</tr>
 					</thead>
 					<tbody>

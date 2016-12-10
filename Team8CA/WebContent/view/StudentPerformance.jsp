@@ -60,9 +60,7 @@
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
-				<h4 class="page-header">
-					<fmt:message key="label.performance.id" /> &nbsp;${id}
-				</h4>
+				
 				<table class="table">
 					<thead>
 						<tr>

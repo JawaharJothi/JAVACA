@@ -57,7 +57,7 @@ public class CourseLoad extends HttpServlet {
 		HttpSession session=request.getSession();   
 		request.setAttribute("courseList", cList);
 		session.setAttribute("lecturerList", lecturerList);
-		RequestDispatcher rd = request.getRequestDispatcher("/view/CourseCRUD.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/view/Course.jsp");
 		rd.forward(request, response);
 	}
 

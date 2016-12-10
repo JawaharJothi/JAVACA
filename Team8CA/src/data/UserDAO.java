@@ -11,4 +11,6 @@ public interface UserDAO {
 	public abstract User createValueObject();
 
 	public  User searchMatching(User valueObject) throws DAOException;
+	
+	public boolean checkUser(User valueObject) throws DAOException;
 }

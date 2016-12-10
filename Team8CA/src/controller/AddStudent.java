@@ -50,6 +50,7 @@ public class AddStudent extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		RequestDispatcher rd =null;
 		StudentManager sm = new StudentManager();
 		StudentDTO sdto = new StudentDTO();
 		sdto.setMatricno(request.getParameter("id"));
@@ -58,33 +59,39 @@ public class AddStudent extends HttpServlet {
 		sdto.setPhone(Integer.parseInt(request.getParameter("phone")));
 		sdto.setEmail(request.getParameter("email"));
 		sdto.setAddress(request.getParameter("address"));
+		sdto.setPassword(request.getParameter("password"));
 	
 		sdto.setStatus(request.getParameter("status"));
 		String ins = (String) request.getParameter("ins");
 		if (ins.equalsIgnoreCase("true")) {
-			
+			request.setAttribute("id", request.getParameter("id"));
+			request.setAttribute("name", request.getParameter("name"));
+			request.setAttribute("password", request.getParameter("password"));
+			request.setAttribute("email", request.getParameter("email"));
+			rd = request.getRequestDispatcher("/view/Email.jsp");
 			sm.insertStudent(sdto);
 		} else {
 			
 			sm.updateStudent(sdto);
-		}
-		int page = 1;
-		int recordsPerPage = 8;
-		if (request.getParameter("page") != null){
-			page = Integer.parseInt(request.getParameter("page"));
-		}
-		else{
-			page =1;
-		}
-		ArrayList<StudentDTO> slist = sm.findallStudents( (page - 1) * recordsPerPage,
-				recordsPerPage);
-		int noOfRecords = sm.gtnoofrecord();
-		int noOfPages = (int) Math.ceil(noOfRecords*1.0/recordsPerPage);
-		request.setAttribute("students", slist);
-		request.setAttribute("noOfPages", noOfPages);
-		request.setAttribute("currentPage", page);
+			int page = 1;
+			int recordsPerPage = 8;
+			if (request.getParameter("page") != null){
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			else{
+				page =1;
+			}
+			ArrayList<StudentDTO> slist = sm.findallStudents( (page - 1) * recordsPerPage,
+					recordsPerPage);
+			int noOfRecords = sm.gtnoofrecord();
+			int noOfPages = (int) Math.ceil(noOfRecords*1.0/recordsPerPage);
+			request.setAttribute("students", slist);
+			request.setAttribute("noOfPages", noOfPages);
+			request.setAttribute("currentPage", page);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/view/Student.jsp");
+			rd = request.getRequestDispatcher("/view/Student.jsp");
+		}
+		
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {

@@ -56,7 +56,7 @@
 									</div>
 									<div class="form-group">
 										<label><fmt:message key="setup.sdob" /></label> <input name="dob"
-											class="form-control" type="text" placeholder="yyyy-MM-dd"
+											class="form-control" type="date" 
 											value="${param['dob']}">
 									</div>
 									<div class="form-group">

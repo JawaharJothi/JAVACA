@@ -83,7 +83,7 @@
 								<td>${lecturer.email }</td>
 								<td>${lecturer.degree }</td>
 								<td><c:url var="updurl" scope="page"
-										value="/team8//classenrolllist">
+										value="/view/LecturerSetup.jsp">
 										<c:param name="id" value="${lecturer.lecturerID  }" />
 										<c:param name="name" value="${lecturer.lecturername }" />
 										<c:param name="dob" value="${lecturer.dob }" />

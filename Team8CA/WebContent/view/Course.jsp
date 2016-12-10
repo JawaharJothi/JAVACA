@@ -35,7 +35,7 @@
 			<div class="col-lg-12">
 
 				<!-- "Add Course" button  -->
-				<c:url var="url" scope="page" value="/view/CourseCreateUpdate.jsp">
+				<c:url var="url" scope="page" value="/view/CourseSetup.jsp">
 					<c:param name="lecturerList" value="lecturerList" />
 					<c:param name="courseName" value="" />
 					<c:param name="typeOfCourse" value="" />
@@ -67,7 +67,7 @@
 
 								<!-- "Edit" button -->
 								<td><c:url var="updurl" scope="page"
-										value="/view/CourseCreateUpdate.jsp">
+										value="/view/CourseSetup.jsp">
 										<c:param name="courseName" value="${course.courseName}" />
 										<c:param name="typeOfCourse" value="${course.typeOfCourse}" />
 										<c:param name="id" value="${course.lecturerID}" />

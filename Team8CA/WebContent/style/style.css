@@ -1,0 +1,23 @@
+.navbar {
+    position: relative;
+    min-height: 50px;
+    border: 1px solid transparent;
+}
+
+.banner {
+    background: url(../img/nus-iss.jpg) no-repeat center center;
+    background-size: cover;
+    height: 600px;
+    width: 100%;
+    padding: 72px 0px;
+}
+
+.container{
+	width:100%;
+	padding:0px;
+}
+
+.container1{
+	width:100%;
+	padding:40px;
+}

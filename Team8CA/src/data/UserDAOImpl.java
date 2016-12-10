@@ -59,6 +59,43 @@ public class UserDAOImpl implements UserDAO{
 	}
 	return result;
 	}
+
+	@Override
+	public boolean checkUser(User valueObject) throws DAOException {
+		// TODO Auto-generated method stub
+		boolean b = false;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		String sql = "SELECT * FROM user WHERE UserID='"+ valueObject.getUserID() +"' AND Password='"+ valueObject.getPassword() +"'";
+		Connection con = null;
+		try{
+		con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		if (rs.next()) {
+
+			b=true;
+			
+		}
+		
+		st.close();
+	}
+
+	catch (SQLException e) {
+		String error = "User Can't find. Nested Exception is: " + e;
+		throw new DAOException(error);
+	} finally {
+		try {
+			con.close();
+		} catch (Exception e) {
+		}
+	}
+		return b;
+	}
 	
 
 

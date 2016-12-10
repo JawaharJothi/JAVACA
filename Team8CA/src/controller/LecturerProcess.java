@@ -53,6 +53,7 @@ public class LecturerProcess extends HttpServlet {
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		RequestDispatcher rd=null;
 		LecturerManager lm = new LecturerManager();
 		LecturerDTO lecturer = new LecturerDTO();
 		lecturer.setLecturerID(request.getParameter("id"));
@@ -62,15 +63,22 @@ public class LecturerProcess extends HttpServlet {
 		lecturer.setEmail(request.getParameter("email"));
 		lecturer.setLectureraddress(request.getParameter("address"));
 		lecturer.setDegree(request.getParameter("edu"));
+		lecturer.setPassword(request.getParameter("password"));
 		String ins = (String) request.getParameter("ins");
 		if (ins.equalsIgnoreCase("true")) {
 			lm.inserLecturer(lecturer);
+			request.setAttribute("id", request.getParameter("id"));
+			request.setAttribute("name", request.getParameter("name"));
+			request.setAttribute("password", request.getParameter("password"));
+			request.setAttribute("email", request.getParameter("email"));
+			rd = request.getRequestDispatcher("/view/Email.jsp");
 		} else {
 			lm.updateLecturer(lecturer);
+			ArrayList<LecturerDTO> data = lm.findallLecturer();
+			request.setAttribute("lecturers", data);
+			rd = request.getRequestDispatcher("/view/Lecturer.jsp");
 		}
-		ArrayList<LecturerDTO> data = lm.findallLecturer();
-		request.setAttribute("lecturers", data);
-		RequestDispatcher rd = request.getRequestDispatcher("/view/Lecturer.jsp");
+		
 		try {
 			rd.forward(request, response);
 		} catch (ServletException e) {

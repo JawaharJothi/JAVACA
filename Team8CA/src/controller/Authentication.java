@@ -55,24 +55,38 @@ public class Authentication extends HttpServlet {
 
 		String u = request.getParameter("username");
 		String p = request.getParameter("password");
+
 		User user1 = new User();
 		user1.setUserID(u);
 		user1.setPassword(p);
 		UserService service = new UserService();
 		User user = new User();
 		
-
+		
 		user = service.authenticate(user1);
-		if(!user.getUserID().equals("")){
+		if(service.check(user1)){
 			HttpSession session = request.getSession();
 			session.setAttribute("profile", user);
-			RequestDispatcher rd = request.getRequestDispatcher("/loadlc");
-			rd.forward(request, response);
+			if(user.getRole().equalsIgnoreCase("administrator")){
+				RequestDispatcher rd = request.getRequestDispatcher("/sload");
+				rd.forward(request, response);
+			}
+			if(user.getRole().equalsIgnoreCase("lecturer")){
+				RequestDispatcher rd = request.getRequestDispatcher("/loadlc");
+				rd.forward(request, response);
+			}
+			
+			if(user.getRole().equalsIgnoreCase("student")){
+				RequestDispatcher rd = request.getRequestDispatcher("/loadclass");
+				rd.forward(request, response);
+			}
 		}
 		else{
-			RequestDispatcher rd = request.getRequestDispatcher("/view/Fail.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/LogIn.jsp");
 			rd.forward(request, response);
 		}
+		
+		
 		
 		
 	
