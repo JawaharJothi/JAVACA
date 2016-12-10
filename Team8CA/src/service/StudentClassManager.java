@@ -83,13 +83,13 @@ public class StudentClassManager {
 			Boolean addTo = true;
 			for(StudentClassDTO j:enrolledClasses){
 				
-				System.out.println("Untaken ClassID:"+ i.getClassID());
-				System.out.println("Untaken Start Date:"+i.getStartDate());
-				System.out.println("Untaken End Date:"+i.getEndDate());
-				System.out.println("Enrolled Start Date:"+j.getStartDate());
-				System.out.println("Enrolled End Date:"+j.getEndDate());
-				System.out.println("Untaken start before Enrolled End:"+ i.getStartDate().before(j.getEndDate()));
-				System.out.println("Untaken End after taken Start:"+i.getEndDate().after(j.getStartDate()));
+//				System.out.println("Untaken ClassID:"+ i.getClassID());
+//				System.out.println("Untaken Start Date:"+i.getStartDate());
+//				System.out.println("Untaken End Date:"+i.getEndDate());
+//				System.out.println("Enrolled Start Date:"+j.getStartDate());
+//				System.out.println("Enrolled End Date:"+j.getEndDate());
+//				System.out.println("Untaken start before Enrolled End:"+ i.getStartDate().before(j.getEndDate()));
+//				System.out.println("Untaken End after taken Start:"+i.getEndDate().after(j.getStartDate()));
 				if(((i.getStartDate().before(j.getEndDate())&&i.getStartDate().after(j.getStartDate()))||(i.getEndDate().after(j.getStartDate())&&i.getEndDate().before(j.getEndDate())))||(i.getStartDate().before(j.getStartDate())&&i.getEndDate().after(j.getEndDate()))){
 					addTo=false;
 				}

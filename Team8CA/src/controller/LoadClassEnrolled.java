@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import data.ClassDAO;
 import data.DaoFactory;
 import model.ClassDTO;
+import model.User;
 import service.ClassManager;
 
 
@@ -48,9 +49,14 @@ public class LoadClassEnrolled extends HttpServlet {
 		System.out.println("ss");
 		ArrayList<ClassDTO> classList = null;
 		
+		//Retrieves User by using HTTPSession established
+		User user = new User();
+		user = (User)request.getSession().getAttribute("profile");
+		
+		
 		ClassManager classManager = new ClassManager();
 		
-		classList = classManager.getClassesWithNumberEnrolled("E0080");
+		classList = classManager.getClassesWithNumberEnrolled(user.getUserID());
 		
 		request.setAttribute("classList", classList);
 		

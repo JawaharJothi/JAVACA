@@ -62,8 +62,12 @@
 						</c:forEach>
 						
 					</tbody>
+					<tr>
+						<td colspan="3" align="left">Cumulative Average Point</td>
+						<td colspan= "1" align="left">${CAP}</td>
+					</tr>
 				</table>
-				${CAP}
+				
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>

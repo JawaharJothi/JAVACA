@@ -25,13 +25,13 @@
 		<c:when test="${profile.getRole()=='student'}">
 			<ul class="nav" id="side-menu">
 
-				<li><a href="<%=request.getContextPath()%>/loadclass"><i
+				<li><a href="<%=request.getContextPath()%>/LoadClass"><i
 						class="fa fa-dashboard fa-fw"></i> View Courses</a></li>
 
-				<li><a href=" <%=request.getContextPath()%>/StudentEnrolment"> <i
+				<li><a href=" <%=request.getContextPath()%>/LoadClassEnrolled"> <i
 						class="fa fa-table fa-fw"></i> View Enrolled Courses
 				</a></li>
-				<li><a href="<%=request.getContextPath()%>/loadgrade"><i class="fa fa-edit fa-fw"></i>
+				<li><a href="<%=request.getContextPath()%>/LoadGrades"><i class="fa fa-edit fa-fw"></i>
 						View Course Grades</a></li>
 				<li><a href="<%=request.getContextPath()%>/logout"><i
 						class="fa fa-edit fa-fw"></i> LogOut</a></li>

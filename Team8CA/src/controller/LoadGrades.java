@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import model.CourseGradeDTO;
+import model.User;
 import service.GradeManager;
 
 /**
@@ -47,10 +48,15 @@ public class LoadGrades extends HttpServlet {
 		String path = "/view/StudentGrades.jsp";
 		GradeManager gradeManager = new GradeManager();
 		
+		//Retrieves User by using HTTPSession established
+		User user = new User();
+		user = (User)request.getSession().getAttribute("profile");
+		
+		
 		ArrayList<CourseGradeDTO> courseGradeList = null;
-		courseGradeList = gradeManager.findPastGrades("E0090");
+		courseGradeList = gradeManager.findPastGrades(user.getUserID());
 		double CAP = 0;
-		CAP = gradeManager.ComputeCAP("E0090");
+		CAP = gradeManager.ComputeCAP(user.getUserID());
 		request.setAttribute("courseGradeList", courseGradeList);
 		request.setAttribute("CAP", CAP);
 		RequestDispatcher rd = request.getRequestDispatcher(path);
